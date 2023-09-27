@@ -41,6 +41,7 @@ if is_raspberry_pi:
     button = Button(gpio_pin)
     button.when_pressed_screen_sport = toggle_relay
 resource_add_path('./images')
+resource_add_path('./fonts')
 
 # RACE SCREENS ----------------------------------------------------------------------
 class ScreenRace(Screen):
