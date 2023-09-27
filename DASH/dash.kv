@@ -1,0 +1,647 @@
+#:kivy 1.0.9
+<Manager>:
+
+
+        id: screen_manager
+        screen_one : screen_one
+        screen_two : screen_two
+        screen_three : screen_three
+
+        ScreenRace:
+                id: screen_one
+                name: "screenrace"
+                manager: screen_manager
+        ScreenRace2:
+                id: screen_three
+                name: "screenrace2"
+                manager: screen_manager
+
+        ScreenBox:
+                id: screen_two
+                name: "screenbox"   
+                manager: screen_manager
+
+<ScreenRace>:
+
+        FloatLayout:
+                size: 800, 480
+
+                    ####Tach SPORT
+                Image:
+                        source: 'bg_TAC.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.65, "x":0.05}
+                        size_hint: [0.9,0.25]
+                        opacity: (1)
+                Image:
+                        source: 'TAC_SPORT.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.65, "x":0.05}
+                        size_hint: [app.shiftRpm*0.9/360,0.5]
+                        opacity: (1)
+                Image:
+                        source: 'TAC_SPORT.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.65, "x":0.95}
+                        size_hint: [-app.shiftRpm*0.9/360,0.5]
+                        opacity: (1)
+
+                Image:
+                        source: 'bg_Soc.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.4, "x":0.15}
+                        size_hint: [0.17,0.25]
+                        opacity: (1)
+
+                Image:
+                        source: 'soc_SPORT.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.42, "x":0.15}
+                        size_hint: [0.17,app.SOC/485]
+                        opacity: (1)
+
+
+                Image:
+                        source: 'BackGround_dash.png'
+                        size_hint: [1,1]
+
+                            ####COLORE MAPPA#################################
+
+                Image:
+                        source: 'sel_SPORT.png'
+                        pos_hint: {"y": -5/240, "x":170/400}
+                        size_hint: [0.15,0.15]
+                        opacity: (1)
+
+
+                Label:
+                        text: str('SPORT')
+                        font_size: 40
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-105/240, "x":0/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+
+                Image:
+                        source: 'line_sx_SPORT.png'
+                        pos_hint: {"y": -0.25, "x":-0.2}
+                        size_hint: [1,1]
+                        opacity: (1)
+                Image:
+                        source: 'line_dx_SPORT.png'
+                        pos_hint: {"y": -0.24, "x":0.21}
+                        size_hint: [1,1]
+                        opacity: (1)
+                Image:
+                        source: 'sx_freccia_SPORT.png'
+                        pos_hint: {"y": 0.40, "x":-0.165}
+                        size_hint: [.5,.5]
+                        opacity: (1)
+                Image:
+                        source: 'dx_freccia_SPORT.png'
+                        pos_hint: {"y": 0.40, "x":0.665}
+                        size_hint: [.5,.5]
+                        opacity: (1)
+                 ##########################################
+                #SOC ICON#
+                Image:
+                        source: 'battery-status.png'
+                        pos_hint: {"y": 0.03, "x":-0.4}
+                        size_hint: [1,1]
+                        opacity: (1)
+
+                #GPS STATO#
+                Image:
+                        source: 'satellite.png'
+                        pos_hint: {"y": 0.02, "x":0.36}
+                        size_hint: [app.s_SAT*0.06,app.s_SAT*0.06]
+                        opacity: (1)
+                Image:
+                        source: 'satellite.png'
+                        pos_hint: {"y": 0.02, "x":0.36}
+                        size_hint: [0.06,0.06]
+                        opacity: (0.2)
+                #ODO#
+                Label:
+                        text: str(app.ODO) + str( ' Km')
+                        font_size: 22
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-108/240, "x":62/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                Image:
+                        source: 'ODO.png'
+                        pos_hint: {"y": 0.02, "x":0.57}
+                        size_hint: [0.06,0.06]
+                        opacity: (1)
+                #FAULT#
+                Image:
+                        source: 'warning.png'
+                        pos_hint: {"y": 0.3, "x":0.68}
+                        size_hint: [app.fault*0.25,app.fault*0.25]
+                        opacity: (1)
+
+                ############DATA################################
+                ##########################T WATER #############
+                Label:
+                        text: ('T wat')
+                        font_size: 20
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-95/240, "x":-184/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: str(int(app.T_WAT))
+                        pos_hint: {"y":-110/240, "x":-185/400}
+                        font_size: 30
+                        markup: True
+                        font_name: 'd7.ttf'
+                        color: 1,1,1,1
+                Label:
+                        text: ('C')
+                        font_size: 25
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-110/240, "x":-170/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                #############Tmot################################
+                Label:
+                        text: ('T mot')
+                        font_size: 20
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-60/240, "x":-184/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: str(int(app.T_MOT))
+                        pos_hint: {"y":-75/240, "x":-185/400}
+                        font_size: 30
+                        markup: True
+                        font_name: 'd7.ttf'
+                        color: 1,1,1,1
+                Label:
+                        text: ('C')
+                        font_size: 25
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-75/240, "x":-170/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                ##############################################################
+                #soc dashboard
+                Label:
+                        text: ('BATTERY')
+                        font_size: 20
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-90/240, "x":180/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: ('V')
+                        font_size: 30
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-108/240, "x":160/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: str( int(app.V_BAT_HV))
+                        pos_hint: {"y":-108/240, "x":180/400}
+                        font_size: 40
+                        markup: True
+                        font_name: 'd7.ttf'
+                        color: 1,1,1,1
+
+                #Velocità relativa dashboard
+                Label:
+                        id: speed_label
+                        pos_hint: {"y":-68/240, "x":56/400}
+                        font_size: 25
+                        font_name: 'd7.ttf'
+                        #text: ('Km/h')
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":20/240, "x":-5/400}
+                        text:str(int(app.Speed_km_h))
+                        font_name: 'd7.ttf'
+                        font_size: 120
+                        markup: True
+                        color: 1,1,1,1
+
+
+                Label:
+                        pos_hint: {"y":2/240, "x":50/400}
+                        text:'KM/H'
+                        font_name: 'd7.ttf'
+                        font_size: 30
+                        markup: True
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":5/240, "x":-115/400}
+                        text:str(int(app.SOC))+ '%'
+                        font_name: 'd7.ttf'
+                        font_size: 50
+                        markup: True
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":-45/240, "x":0/400}
+                        text:str( app.LAP_TIME)
+                        font_name: 'd7.ttf'
+                        font_size: 75
+                        markup: True
+                        color: 1,1,1,1
+                Label:
+                        pos_hint: {"y":-75/240, "x":-2/400}
+                        text: 'best: '+str( app.LAP_BEST)
+                        font_name: 'd7.ttf'
+                        font_size: 35
+                        markup: True
+                        color: 1,1,1,0.6
+
+
+<ScreenRace2>:
+
+        FloatLayout:
+                size: 800, 480
+
+                    ####Tach ECO
+                Image:
+                        source: 'bg_TAC.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.65, "x":0.05}
+                        size_hint: [0.9,0.25]
+                        opacity: (1)
+                Image:
+                        source: 'TAC_ECO.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.65, "x":0.05}
+                        size_hint: [app.shiftRpm*0.9/360,0.25]
+                        opacity: (1)
+                Image:
+                        source: 'TAC_ECO.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.65, "x":0.95}
+                        size_hint: [-app.shiftRpm*0.9/360,0.25]
+                        opacity: (1)
+
+
+                Image:
+                        source: 'bg_Soc.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.4, "x":0.15}
+                        size_hint: [0.17,0.25]
+                        opacity: (1)
+                Image:
+                        source: 'soc_ECO.png'
+                        keep_ratio: False
+                        allow_stretch: True
+                        pos_hint: {"y": 0.42, "x":0.15}
+                        size_hint: [0.17,app.SOC/485]
+                        opacity: (1)
+
+                Image:
+                        source: 'BackGround_dash.png'
+                        size_hint: [1,1]
+
+                            ####COLORE MAPPA#################################
+                Image:
+                        source: 'sel_ECO.png'
+                        pos_hint: {"y": -5/240, "x":170/400}
+                        size_hint: [0.15,0.15]
+                        opacity: (1)
+
+                Label:
+                        text: str('ECO')
+                        font_size: 40
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-105/240, "x":0/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+
+                Image:
+                        source: 'line_sx_ECO.png'
+                        pos_hint: {"y": -0.25, "x":-0.2}
+                        size_hint: [1,1]
+                        opacity: (1)
+                Image:
+                        source: 'line_dx_ECO.png'
+                        pos_hint: {"y": -0.25, "x":0.2}
+                        size_hint: [1,1]
+                        opacity: (1)
+                Image:
+                        source: 'sx_freccia_ECO.png'
+                        pos_hint: {"y": 0.40, "x":-0.165}
+                        size_hint: [.5,.5]
+                        opacity: (1)
+                Image:
+                        source: 'dx_freccia_ECO.png'
+                        pos_hint: {"y": 0.40, "x":0.665}
+                        size_hint: [.5,.5]
+                        opacity: (1)
+
+                 ##########################################
+                #SOC ICON#
+                Image:
+                        source: 'battery-status.png'
+                        pos_hint: {"y": 0.03, "x":-0.4}
+                        size_hint: [1,1]
+                        opacity: (1)
+
+                #GPS STATO#
+                Image:
+                        source: 'satellite.png'
+                        pos_hint: {"y": 0.02, "x":0.36}
+                        size_hint: [app.s_SAT*0.06,app.s_SAT*0.06]
+                        opacity: (1)
+                Image:
+                        source: 'satellite.png'
+                        pos_hint: {"y": 0.02, "x":0.36}
+                        size_hint: [0.06,0.06]
+                        opacity: (0.2)
+                #ODO#
+                Label:
+                        text: str(app.ODO) + str( ' Km')
+                        font_size: 22
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-108/240, "x":62/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                Image:
+                        source: 'ODO.png'
+                        pos_hint: {"y": 0.02, "x":0.57}
+                        size_hint: [0.06,0.06]
+                        opacity: (1)
+                #FAULT#
+                Image:
+                        source: 'warning.png'
+                        pos_hint: {"y": 0.3, "x":0.68}
+                        size_hint: [app.fault*0.25,app.fault*0.25]
+                        opacity: (1)
+
+                ############DATA################################
+                ##########################T WATER #############
+                Label:
+                        text: ('T wat')
+                        font_size: 20
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-95/240, "x":-184/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: str(int(app.T_WAT))
+                        pos_hint: {"y":-110/240, "x":-185/400}
+                        font_size: 30
+                        markup: True
+                        font_name: 'd7.ttf'
+                        color: 1,1,1,1
+                Label:
+                        text: ('C')
+                        font_size: 25
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-110/240, "x":-170/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                #############Tmot################################
+                Label:
+                        text: ('T mot')
+                        font_size: 20
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-60/240, "x":-184/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: str(int(app.T_MOT))
+                        pos_hint: {"y":-75/240, "x":-185/400}
+                        font_size: 30
+                        markup: True
+                        font_name: 'd7.ttf'
+                        color: 1,1,1,1
+                Label:
+                        text: ('C')
+                        font_size: 25
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-75/240, "x":-170/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                ##############################################################
+                #soc dashboard
+                Label:
+                        text: ('BATTERY')
+                        font_size: 20
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-90/240, "x":180/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: ('V')
+                        font_size: 30
+                        font_name: 'd7.ttf'
+                        pos_hint: {"y":-108/240, "x":160/400}
+                        #size_hint: [.33,.33]
+                        color: 1,1,1,1
+                        markup: True
+                Label:
+                        text: str( int(app.V_BAT_HV))
+                        pos_hint: {"y":-108/240, "x":180/400}
+                        font_size: 40
+                        markup: True
+                        font_name: 'd7.ttf'
+                        color: 1,1,1,1
+
+                #Velocità relativa dashboard
+                Label:
+                        id: speed_label
+                        pos_hint: {"y":-68/240, "x":56/400}
+                        font_size: 25
+                        font_name: 'd7.ttf'
+                        #text: ('Km/h')
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":20/240, "x":-5/400}
+                        text:str(int(app.Speed_km_h))
+                        font_name: 'd7.ttf'
+                        font_size: 120
+                        markup: False
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":2/240, "x":50/400}
+                        text:'KM/H'
+                        font_name: 'd7.ttf'
+                        font_size: 30
+                        markup: True
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":5/240, "x":-115/400}
+                        text:str(int(app.SOC))+ '%'
+                        font_name: 'd7.ttf'
+                        font_size: 50
+                        markup: True
+                        color: 1,1,1,1
+
+                Label:
+                        pos_hint: {"y":-45/240, "x":0/400}
+                        text: str( app.LAP_TIME)
+                        font_name: 'd7.ttf'
+                        font_size: 75
+                        markup: True
+                        color: 1,1,1,1
+                Label:
+                        pos_hint: {"y":-75/240, "x":-2/400}
+                        text: 'best: '+str( app.LAP_BEST)
+                        font_name: 'd7.ttf'
+                        font_size: 35
+                        markup: True
+                        color: 1,1,1,0.6
+
+
+
+<ScreenBox>:
+        FloatLayout:
+                size: 800, 480
+                Image:
+                        source: 'mec3.png'
+                        size_hint: [1,1]
+                        opacity: 1
+                #--------------------------------------------------------------------------------#
+                #TIME#
+                Label:
+                        pos_hint: {"y":0.40, "x":-0.24}
+                        text: str(app.time_now)
+                        font_name: 'FFFFORWA.TTF'
+                        font_size: app.txtNUM*0.5
+                        color: 1,1,1,1
+                #n_SATELLITI#
+                Label:
+                        pos_hint: {"y":0.40, "x":-0.1}
+                        text:str(app.n_SAT)
+                        font_name: 'FFFFORWA.TTF'
+                        font_size: app.txtNUM*0.5
+                        color: 1,1,1,1
+                Image:
+                        source: 'satellite.png'
+                        pos_hint: {"y": 0.86, "x":0.4}
+                        size_hint: [0.1,0.1]
+                        opacity: (1)
+                #FAULT#
+                Image:
+                        source: 'warning.png'
+                        pos_hint: {"y": 0.82, "x":0.6}
+                        size_hint: [0.1,0.18]
+                        opacity: (0)
+                #--------------------------------------------------------------------------------#
+
+
+
+                ######################################################################### RIGA 1
+                #--------------------------------------------------------------------------------#
+                Label:
+                        pos_hint: {"y":0.23, "x":-0.33}
+                        text: str(int(app.TQ_DEMAND)) #str(app.shiftTps)
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":0.23, "x":0}
+                        text: str(int(app.V_BAT_HV))
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":0.23, "x":0.34}
+                        text: str(app.V_BAT_LV)
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                #--------------------------------------------------------------------------------#
+
+                ######################################################################### RIGA 2
+                #--------------------------------------------------------------------------------#
+                Label:
+                        pos_hint: {"y":0.018, "x":-0.33}
+                        text:str(int(app.BRAKE)) #brake
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":0.018, "x":0.0}
+                        text: str(int(app.SOC))
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":0.018, "x":0.34}
+                        text: str(app.T_WAT)
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                #--------------------------------------------------------------------------------#
+
+                ######################################################################### RIGA 3
+                #--------------------------------------------------------------------------------#
+                Label:
+                        pos_hint: {"y":-0.18, "x":-0.33}
+                        text: str(int(app.FRONT))
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":-0.18, "x":0}
+                        text: str(int(-1))
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":-0.18, "x":0.34}
+                        text: str(app.T_INV) # T_Inverter
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                #--------------------------------------------------------------------------------#
+
+                ######################################################################### RIGA 4
+                #--------------------------------------------------------------------------------#
+                Label:
+                        pos_hint: {"y":-0.40, "x":-0.33}
+                        text:str(int(app.MONO))     #MONO
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":-0.4, "x":0}
+                        text: str(app.LAP_BEST)  #LAPBEST
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                Label:
+                        pos_hint: {"y":-0.4, "x":0.34}
+                        text: str(app.T_MOT)  #Tmotor
+                        font_name: 'd7.ttf'
+                        font_size: app.txtNUM
+                        color: 0,0,0,1
+                #--------------------------------------------------------------------------------#
