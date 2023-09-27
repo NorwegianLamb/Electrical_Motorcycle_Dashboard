@@ -14,12 +14,12 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.core.window import Window
+from kivy.resources import resource_add_path
+from kivy.lang import Builder
 from datetime import datetime
 from datetime import timedelta
-from kivy.lang import Builder
 import threading
 import time
-import os
 import keyboard
 import platform
 import can
@@ -40,6 +40,7 @@ if is_raspberry_pi:
     relay = LED(gpio_pin)
     button = Button(gpio_pin)
     button.when_pressed_screen_sport = toggle_relay
+resource_add_path('./images')
 
 # RACE SCREENS ----------------------------------------------------------------------
 class ScreenRace(Screen):
