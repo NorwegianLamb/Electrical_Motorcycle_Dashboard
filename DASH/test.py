@@ -23,6 +23,7 @@ os.system("sudo /sbin/ip link set can0 up type can bitrate 250000") # analyze th
 time.sleep(1)
 
 bus = can.interface.Bus(channel='can0', bustype='socketcan', bitrate='250000')  # bus channel & type refer to python-can docs
+inverter_id = [x for x in range(610, 630)]
 
 class ScreenRace(Screen):
     pass
@@ -93,6 +94,7 @@ class Manager(ScreenManager):
             check_state = 3
         else:
             pass
+        # ---------------------------------------------------------------------------
 
 
 class CanThread(threading.Thread):
@@ -110,6 +112,7 @@ class CanThread(threading.Thread):
                         # -> manage bus load and set priority from analyzer
                 message = bus.recv()
                 global button1, button2, buttonb
+                # ---------------------------------------------------------------------------
                 if message.arbitration_id == 0x218: # what if "ALL_FALSE" state? switch states to be true with prio and all FALSE to that?
                     if(message.data[4] == 0x01):
                         button1 = True
@@ -169,20 +172,24 @@ class CanThread(threading.Thread):
                     self.app.ODO = 256 * message.data[2] + message.data[3]
                     self.app.T_WAT = 256 * message.data[2] + message.data[3]
                     self.app.FRONT = 256 * message.data[2] + message.data[3]
+                # ---------------------------------------------------------------------------
                 if check_state == 3:
                     delta = time.time() - start
                     if delta > 0.250:
                         time_Flag = not time_Flag
                         self.app.shiftRpm = time_Flag * 180
                         start = time.time()
+                # ---------------------------------------------------------------------------
                 if keyboard.is_pressed('f'):
                     self.app.fault = 1
                 else:
                     self.app.fault = 0
+                # ---------------------------------------------------------------------------
                 if (self.app.n_SAT > 1) or keyboard.is_pressed('s'):
                     self.app.s_SAT = 1
                 else:
                     self.app.s_SAT = 0
+                # ---------------------------------------------------------------------------
                 self.app.time_now = time.strftime("%H:%M", time.localtime())
         except KeyboardInterrupt:
             os.system("sudo /sbin/ip link set can0 down")
