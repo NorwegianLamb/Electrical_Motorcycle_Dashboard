@@ -54,6 +54,7 @@ class ScreenBox(Screen):
     pass
 # ------------------------------------------------------------------------------------
 
+
 class Manager(ScreenManager):
     screen_one = ObjectProperty(None)
     screen_two = ObjectProperty(None)
