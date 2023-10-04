@@ -19,11 +19,10 @@ import keyboard
 # ------------------------------------------------------------------------------#
 
 # Bring up can0 vcan0 slcan0 interface
-os.system("sudo /sbin/ip link set can0 up type can bitrate 250000") # analyze this
+os.system("sudo /sbin/ip link set can0 up type can bitrate 250000")
 time.sleep(1)
 
 bus = can.interface.Bus(channel='can0', bustype='socketcan', bitrate='250000')  # bus channel & type refer to python-can docs
-inverter_id = [x for x in range(610, 630)]
 
 class ScreenRace(Screen):
     pass
@@ -41,7 +40,7 @@ class ScreenBox(Screen):
     pass
 
 
-check_state = 0
+ceck_State = 0
 button1 = False
 button2 = False
 buttonb = False
@@ -54,24 +53,24 @@ class Manager(ScreenManager):
 
     # Cambia il valore degli if per cambiare la schermata
     def update(self, dt):
-        global check_state, button1, button2, buttonb
+        global ceck_State, button1, button2, buttonb
         if(buttonb):
             print("funziona")
             self.transition.direction = 'up'
             self.current = 'screenbox'
-            check_state = 10
+            ceck_State = 10
             buttonb = False
         elif(button1):
             print("funziona1")
             self.transition.direction = 'left'
             self.current = 'screenrace'
-            check_state = 1
+            ceck_State = 1
             button1 = False
         elif(button2):
             print("funziona2")
             self.transition.direction = 'left'
             self.current = 'screenrace2'
-            check_state = 2
+            ceck_State = 2
             button2 = False
         else:
             pass
@@ -79,22 +78,21 @@ class Manager(ScreenManager):
         if keyboard.is_pressed('b'):
             self.transition.direction = 'up'
             self.current = 'screenbox'
-            check_state = 10
+            ceck_State = 10
         elif keyboard.is_pressed('1'):
             self.transition.direction = 'left'
             self.current = 'screenrace'
-            check_state = 1
+            ceck_State = 1
         elif keyboard.is_pressed('2'):
             self.transition.direction = 'left'
             self.current = 'screenrace2'
-            check_state = 2
-        elif keyboard.is_pressed('3'): # third one (?)
+            ceck_State = 2
+        elif keyboard.is_pressed('3'):
             self.transition.direction = 'left'
             self.current = 'screenrace3'
-            check_state = 3
+            ceck_State = 3
         else:
             pass
-        # ---------------------------------------------------------------------------
 
 
 class CanThread(threading.Thread):
@@ -112,7 +110,6 @@ class CanThread(threading.Thread):
                         # -> manage bus load and set priority from analyzer
                 message = bus.recv()
                 global button1, button2, buttonb
-                # ---------------------------------------------------------------------------
                 if message.arbitration_id == 0x218: # what if "ALL_FALSE" state? switch states to be true with prio and all FALSE to that?
                     if(message.data[4] == 0x01):
                         button1 = True
@@ -172,24 +169,20 @@ class CanThread(threading.Thread):
                     self.app.ODO = 256 * message.data[2] + message.data[3]
                     self.app.T_WAT = 256 * message.data[2] + message.data[3]
                     self.app.FRONT = 256 * message.data[2] + message.data[3]
-                # ---------------------------------------------------------------------------
-                if check_state == 3:
+                if ceck_State == 3:
                     delta = time.time() - start
                     if delta > 0.250:
                         time_Flag = not time_Flag
                         self.app.shiftRpm = time_Flag * 180
                         start = time.time()
-                # ---------------------------------------------------------------------------
                 if keyboard.is_pressed('f'):
                     self.app.fault = 1
                 else:
                     self.app.fault = 0
-                # ---------------------------------------------------------------------------
                 if (self.app.n_SAT > 1) or keyboard.is_pressed('s'):
                     self.app.s_SAT = 1
                 else:
                     self.app.s_SAT = 0
-                # ---------------------------------------------------------------------------
                 self.app.time_now = time.strftime("%H:%M", time.localtime())
         except KeyboardInterrupt:
             os.system("sudo /sbin/ip link set can0 down")
